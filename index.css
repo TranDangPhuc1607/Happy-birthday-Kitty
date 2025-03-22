@@ -176,3 +176,79 @@ body {
         opacity: 1;
     }
 }
+
+/* Responsive for tablets and phones */
+@media (max-width: 1024px) {
+    .heart {
+        width: 90px;
+        height: 90px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 90px;
+        height: 90px;
+    }
+
+    .heart::before {
+        top: -45px;
+    }
+
+    .heart::after {
+        left: 45px;
+    }
+
+    .message {
+        font-size: 2em;
+    }
+
+    #media-video {
+        width: 90vw;
+        max-height: 70vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .heart {
+        width: 70px;
+        height: 70px;
+    }
+
+    .heart::before,
+    .heart::after {
+        width: 70px;
+        height: 70px;
+    }
+
+    .heart::before {
+        top: -35px;
+    }
+
+    .heart::after {
+        left: 35px;
+    }
+
+    .message {
+        font-size: 1.5em;
+        padding: 0 10px;
+    }
+
+    #media-video {
+        width: 95vw;
+        max-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .message {
+        font-size: 1.4em;
+        padding: 0 10px;
+        white-space: pre-line;
+        word-break: break-word;
+    }
+
+    /* Break message into 1 word per line using JS-friendly ID */
+    #message.break-vertical {
+        display: block;
+    }
+}

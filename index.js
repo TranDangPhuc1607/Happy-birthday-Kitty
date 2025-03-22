@@ -1,11 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     const heart = document.getElementById('heart');
 
-    heart.addEventListener('click', function () {
+    const clickEvent = ('ontouchstart' in window || navigator.maxTouchPoints) ? 'touchstart' : 'click';
+
+    heart.addEventListener(clickEvent, function () {
+        // Always reposition
         heart.style.position = 'absolute';
         heart.style.top = '10%';
         heart.style.left = '50%';
         heart.style.transform = 'translateX(-50%) rotate(-45deg)';
+
+        // ✅ Hide heart for better media viewing on tablets/phones
+        if (window.innerWidth <= 1024) {
+            heart.style.display = 'none';
+        }
 
         startAnimations();
 
@@ -13,10 +21,20 @@ document.addEventListener('DOMContentLoaded', () => {
             const iframe = document.getElementById('bg-music');
             iframe.src = iframe.src.replace("mute=1", "mute=0");
 
-            document.getElementById('message').style.display = 'block';
+            const message = document.getElementById('message');
 
-            startMediaSlideshow(); // ✅ Images + Videos
+            // ✅ If small screen, stack text vertically
+            if (window.innerWidth <= 480) {
+                const original = "HAPPY BIRTHDAY KITTY THANH TUYỀN";
+                const stacked = original.split(" ").join("\n");
+                message.classList.add("break-vertical");
+                message.textContent = stacked;
+            }
+
+            message.style.display = 'block';
+            startMediaSlideshow();
         }, 1500);
+
     });
 });
 
@@ -82,27 +100,23 @@ function startMediaSlideshow() {
         const current = mediaList[currentIndex];
 
         if (current.type === 'image') {
-            // Show image as background
             videoElement.style.display = 'none';
             videoElement.pause();
             videoElement.removeAttribute('src');
             videoElement.load();
             mediaContainer.style.backgroundImage = `url('${current.src}')`;
 
-            // After 3 seconds, move to next
             setTimeout(() => {
                 currentIndex = (currentIndex + 1) % mediaList.length;
                 showNextMedia();
             }, 3000);
 
         } else if (current.type === 'video') {
-            // Show video centered
             mediaContainer.style.backgroundImage = 'none';
             videoElement.src = current.src;
             videoElement.style.display = 'block';
             videoElement.play();
 
-            // When video ends, go to next
             videoElement.onended = () => {
                 videoElement.style.display = 'none';
                 currentIndex = (currentIndex + 1) % mediaList.length;
@@ -111,5 +125,5 @@ function startMediaSlideshow() {
         }
     }
 
-    showNextMedia(); // start the carousel
+    showNextMedia();
 }
