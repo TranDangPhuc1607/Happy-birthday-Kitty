@@ -70,7 +70,8 @@ function startMediaSlideshow() {
         { type: 'image', src: './PUBLIC/IMAGE/IMG_20230118_014927.jpg' },
         { type: 'image', src: './PUBLIC/IMAGE/IMG_20230118_014934.jpg' },
         { type: 'video', src: './PUBLIC/VIDEO/b4ecf8b6ac3b006b6c0f69c529eca42e.mp4' },
-        { type: 'video', src: './PUBLIC/VIDEO/SnapTik_App_7284972090703351047-HD.mp4' }
+        { type: 'video', src: './PUBLIC/VIDEO/SnapTik_App_7284972090703351047-HD.mp4' },
+        { type: 'video', src: './PUBLIC/VIDEO/SnapTik_App_7281814028060544264-HD.mp4' }
     ];
 
     const mediaContainer = document.getElementById('media-container');
